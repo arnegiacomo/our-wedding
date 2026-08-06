@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Arne &amp; Klara</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="theme-color" content="#23241f">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/style.css">
+<script>
+  (() => {
+    const supported = ['en', 'no', 'it'];
+    const stored = localStorage.getItem('lang');
+    const preferred = (navigator.languages || [navigator.language || 'en'])
+      .map(l => l.slice(0, 2).toLowerCase())
+      .find(l => supported.includes(l));
+    document.documentElement.lang = supported.includes(stored) ? stored : (preferred || 'en');
+  })();
+</script>
+</head>
+<body>
+
+<nav class="langs" aria-label="Language">
+  <button type="button" data-lang="en" lang="en">English</button>
+  <button type="button" data-lang="no" lang="no">Norsk</button>
+  <button type="button" data-lang="it" lang="it">Italiano</button>
+</nav>
+
+<main>
+  <p class="eyebrow">404</p>
+  <h1 data-i18n="nf.title"></h1>
+  <p class="lead">
+    <span data-i18n="nf.body"></span><br>
+    <a class="home" href="/" data-i18n="nf.home"></a>
+  </p>
+</main>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
