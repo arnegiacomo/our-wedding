@@ -210,20 +210,17 @@ h1 {
 
 .group + .group { margin-top: clamp(2.5rem, 6vh, 3.75rem); }
 
-/* One screen at a time. Proximity on narrow screens, where a screen can grow
-   past the viewport and mandatory snapping would strand its bottom. */
-@media (min-height: 720px) {
-  html { scroll-snap-type: y proximity; }
+/* One screen at a time, phones included. A screen that outgrows the viewport
+   still scrolls freely: an oversized snap area counts as snapped at any
+   position where it covers the viewport. */
+@media (min-height: 600px) {
+  html { scroll-snap-type: y mandatory; }
 
   .hero,
   .block {
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
-}
-
-@media (min-height: 720px) and (min-width: 700px) {
-  html { scroll-snap-type: y mandatory; }
 }
 
 .next {
