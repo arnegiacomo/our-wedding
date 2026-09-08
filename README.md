@@ -1,6 +1,6 @@
 # arneandklara.wedding
 
-Placeholder page for our wedding. Plain HTML, CSS and some JS, hosted on GitHub Pages.
+Single page for our wedding. Plain HTML, CSS and some JS, hosted on GitHub Pages.
 
 Run locally with `python3 dev.py` - serves on http://localhost:8000 with live reload
 on any `.html`, `.css` or `.js` change.

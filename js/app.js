@@ -1,6 +1,10 @@
 const LANGS = Object.keys(TRANSLATIONS);
 const PHOTOS = ['assets/hero.webp', 'assets/hero.jpg', 'assets/hero.png'];
 
+// While this is empty the page says the form opens shortly, so the invitation
+// never points at a dead button.
+const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScUxx5KTN_eaxWu33RxOMcEGtIRdr17SSTnGjAzjFXcJHi9lA/viewform';
+
 function setLang(lang) {
   if (!LANGS.includes(lang)) lang = 'en';
   const dict = TRANSLATIONS[lang];
@@ -19,27 +23,25 @@ function setLang(lang) {
     }
   });
 
-  const photo = document.getElementById('photo');
-  if (photo && !photo.hidden) photo.alt = dict['a11y.photo'];
-
   document.querySelectorAll('[data-lang]').forEach(btn => {
     btn.setAttribute('aria-pressed', btn.dataset.lang === lang);
   });
 }
 
-function loadPhoto(el, sources) {
-  if (!sources.length) return;
+// Shows the first source that actually exists, so a missing file just leaves
+// the slot empty instead of a broken image.
+function loadImage(el, sources, done) {
+  if (!el || !sources.length) return;
 
   const [src, ...rest] = sources;
   const probe = new Image();
   probe.src = src;
   probe.onload = () => {
     el.src = src;
-    el.alt = TRANSLATIONS[document.documentElement.lang]['a11y.photo'];
     el.hidden = false;
-    document.body.classList.add('has-photo');
+    if (done) done();
   };
-  probe.onerror = () => loadPhoto(el, rest);
+  probe.onerror = () => loadImage(el, rest, done);
 }
 
 document.querySelectorAll('[data-lang]').forEach(btn => {
@@ -48,5 +50,12 @@ document.querySelectorAll('[data-lang]').forEach(btn => {
 
 setLang(document.documentElement.lang);
 
-const photo = document.getElementById('photo');
-if (photo) loadPhoto(photo, PHOTOS);
+loadImage(document.getElementById('photo'), PHOTOS,
+  () => document.body.classList.add('has-photo'));
+
+const form = document.getElementById('form');
+if (form && FORM_URL) {
+  form.href = FORM_URL;
+  form.hidden = false;
+  document.getElementById('form-soon').hidden = true;
+}

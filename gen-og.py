@@ -87,7 +87,7 @@ def main():
          '<body class="has-photo">'
          '<img class="photo" src="assets/hero.webp" alt="">'
          f'<p class="eyebrow">{eyebrow}</p>'
-         '<h1>Arne &amp; Klara</h1>'
+         '<h1>Klara &amp; Arne</h1>'
          f'<p class="date">{date}</p>'
          '<p class="url">arneandklara.wedding</p>',
          png, WIDTH, HEIGHT)

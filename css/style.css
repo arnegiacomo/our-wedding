@@ -35,10 +35,18 @@
   --ground: #23241f;
   --on-photo: #ffffff;
   --on-photo-dim: rgba(255, 255, 255, 0.82);
+  --nav-h: 4.75rem;
+  /* Below the hero the page turns over to paper. */
+  --paper: #f6f3ec;
+  --ink: #2a2b25;
+  --ink-dim: rgba(42, 43, 37, 0.68);
+  --rule: rgba(42, 43, 37, 0.13);
   --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
 
 html, body { height: 100%; }
 
@@ -50,8 +58,6 @@ body {
   font-family: var(--sans);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  display: grid;
-  grid-template-rows: auto 1fr;
 }
 
 .photo {
@@ -75,10 +81,18 @@ body {
 }
 
 .langs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   gap: 1.5rem;
-  padding: 1.75rem 2rem;
+  height: var(--nav-h);
+  padding: 0 2rem;
+  mix-blend-mode: difference;
 }
 
 .langs button {
@@ -102,13 +116,14 @@ body {
   outline-offset: 4px;
 }
 
-main {
+.hero {
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   text-align: center;
-  padding: 2rem 1.5rem clamp(3rem, 12vh, 7rem);
+  padding: calc(var(--nav-h) + 2rem) 1.5rem clamp(2.5rem, 9vh, 5rem);
 }
 
 .eyebrow {
@@ -146,10 +161,210 @@ h1 {
   max-width: 26rem;
 }
 
+.cue {
+  margin-top: clamp(1.75rem, 5vh, 3rem);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .7rem;
+  color: var(--on-photo-dim);
+  text-decoration: none;
+  font-size: .6875rem;
+  font-weight: 500;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  transition: color .2s ease;
+}
+
+.cue::after {
+  content: '';
+  width: 1px;
+  height: 2.25rem;
+  background: linear-gradient(to bottom, var(--on-photo-dim), rgba(255, 255, 255, 0));
+}
+
+.cue:hover { color: var(--on-photo); }
+
+/* Opaque, so the fixed photo stays behind the hero only. */
+.sheet {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.block {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 1rem) 1.5rem clamp(4rem, 9vh, 5.5rem);
+  text-align: center;
+}
+
+.group {
+  max-width: 32rem;
+  width: 100%;
+}
+
+.group + .group { margin-top: clamp(2.5rem, 6vh, 3.75rem); }
+
+/* One screen at a time. Proximity on narrow screens, where a screen can grow
+   past the viewport and mandatory snapping would strand its bottom. */
+@media (min-height: 720px) {
+  html { scroll-snap-type: y proximity; }
+
+  .hero,
+  .block {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+@media (min-height: 720px) and (min-width: 700px) {
+  html { scroll-snap-type: y mandatory; }
+}
+
+.next {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(1.75rem, 4vh, 2.75rem);
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  color: rgba(42, 43, 37, 0.4);
+  transition: color .2s ease;
+}
+
+.next::after {
+  content: '';
+  width: .5rem;
+  height: .5rem;
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-25%) rotate(45deg);
+}
+
+.next:hover { color: var(--ink); }
+
+.next:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 2px;
+}
+
+
+.block h2 {
+  margin: 0 0 clamp(1.5rem, 4vh, 2.25rem);
+  font-size: .6875rem;
+  font-weight: 500;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.block p {
+  margin: 0 0 1.125rem;
+  font-size: clamp(1rem, 2.2vw, 1.125rem);
+  line-height: 1.75;
+  color: var(--ink-dim);
+}
+
+.block p:last-child { margin-bottom: 0; }
+
+.block .venue {
+  margin-bottom: .875rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.block .address {
+  font-size: .9375rem;
+  line-height: 1.7;
+}
+
+.block .site {
+  margin-top: 1.25rem;
+  font-size: .8125rem;
+  letter-spacing: .04em;
+}
+
+.sep {
+  margin: 0 .5rem;
+  color: rgba(42, 43, 37, 0.35);
+}
+
+.block .site a,
+.mails a {
+  color: var(--ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .35em;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2.5rem;
+  border: 1px solid rgba(42, 43, 37, 0.3);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: .6875rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.cta:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.cta:focus-visible {
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.block .soon {
+  margin-top: 1.75rem;
+  font-size: .8125rem;
+  letter-spacing: .04em;
+  color: rgba(42, 43, 37, 0.62);
+}
+
+.mails a { line-height: 2.4; }
+
+/* Rides along at the bottom of the last screen rather than owning one. */
+.foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: none;
+  padding: 0 1.5rem clamp(1.75rem, 4vh, 2.75rem);
+}
+
+.foot p {
+  margin: 0;
+  font-size: .8125rem;
+  line-height: 1.7;
+  color: rgba(42, 43, 37, 0.62);
+}
+
 .home {
   color: var(--on-photo);
   text-decoration-thickness: 1px;
   text-underline-offset: .3em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
 
 @media (prefers-reduced-motion: reduce) {

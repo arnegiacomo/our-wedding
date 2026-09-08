@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Arne &amp; Klara</title>
-<meta name="description" content="Arne and Klara are getting married 2-4 July 2027. More information is coming.">
-<meta property="og:title" content="Arne &amp; Klara &middot; 2-4 July 2027">
-<meta property="og:description" content="Arne and Klara are getting married 2-4 July 2027. More information is coming.">
+<title>Klara &amp; Arne</title>
+<meta name="description" content="Klara and Arne are getting married 2-4 July 2027 at Villa Fenicia in Ruvo di Puglia, Italy.">
+<meta property="og:title" content="Klara &amp; Arne &middot; 2-4 July 2027">
+<meta property="og:description" content="Klara and Arne are getting married 2-4 July 2027 at Villa Fenicia in Ruvo di Puglia, Italy.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://arneandklara.wedding/">
-<meta property="og:site_name" content="Arne &amp; Klara">
+<meta property="og:site_name" content="Klara &amp; Arne">
 <meta property="og:locale" content="en_GB">
-<meta property="og:image" content="https://arneandklara.wedding/assets/og.jpg?v=1">
+<meta property="og:image" content="https://arneandklara.wedding/assets/og.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
-<meta property="og:image:alt" content="Arne and Klara - save the date, 2-4 July 2027">
+<meta property="og:image:alt" content="Klara and Arne - save the date, 2-4 July 2027">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#23241f">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
@@ -38,7 +38,7 @@
 </head>
 <body>
 
-<img class="photo" id="photo" alt="" hidden>
+<img class="photo" id="photo" alt="" hidden data-i18n-attr="alt:a11y.photo">
 
 <nav class="langs" aria-label="Language">
   <button type="button" data-lang="en" lang="en">English</button>
@@ -47,10 +47,82 @@
 </nav>
 
 <main>
-  <p class="eyebrow" data-i18n="hero.eyebrow"></p>
-  <h1>Arne &amp; Klara</h1>
-  <p class="date"><time datetime="2027-07-02" data-i18n="hero.date"></time></p>
-  <p class="lead" data-i18n="hero.lead"></p>
+
+  <section class="hero" id="top">
+    <p class="eyebrow" data-i18n="hero.eyebrow"></p>
+    <h1>Klara &amp; Arne</h1>
+    <p class="date"><time datetime="2027-07-02" data-i18n="hero.date"></time></p>
+    <p class="lead" data-i18n="hero.lead"></p>
+    <a class="cue" href="#weekend" data-i18n="hero.more"></a>
+  </section>
+
+  <div class="sheet">
+
+    <section class="block" id="weekend">
+      <div class="group">
+        <h2 data-i18n="days.title"></h2>
+        <p data-i18n="days.body"></p>
+      </div>
+      <div class="group">
+        <h2 data-i18n="where.title"></h2>
+        <p class="venue">Villa Fenicia</p>
+        <p class="address">SP 86 Ruvo&#8209;Bisceglie, km 2<br>70037 Ruvo di Puglia (BA), Italia</p>
+        <p class="site">
+          <a href="https://www.villafenicia.com/" rel="noopener">villafenicia.com</a>
+          <span class="sep" aria-hidden="true">&middot;</span>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Villa+Fenicia+Ruvo+di+Puglia"
+             rel="noopener" data-i18n="where.maps"></a>
+        </p>
+      </div>
+      <a class="next" href="#travel" data-i18n-attr="aria-label:a11y.next"></a>
+    </section>
+
+    <section class="block" id="travel">
+      <div class="group">
+        <h2 data-i18n="travel.title"></h2>
+        <p data-i18n="travel.air"></p>
+        <p data-i18n="travel.rail"></p>
+        <p data-i18n="travel.car"></p>
+      </div>
+      <div class="group">
+        <h2 data-i18n="stay.title"></h2>
+        <p data-i18n="stay.body"></p>
+      </div>
+      <a class="next" href="#guests" data-i18n-attr="aria-label:a11y.next"></a>
+    </section>
+
+    <section class="block" id="guests">
+      <div class="group">
+        <h2 data-i18n="guests.title"></h2>
+        <p data-i18n="guests.kids"></p>
+        <p data-i18n="guests.partners"></p>
+      </div>
+      <div class="group">
+        <h2 data-i18n="rsvp.title"></h2>
+        <p data-i18n="rsvp.body"></p>
+        <a class="cta" id="form" href="#" hidden target="_blank" rel="noopener"
+           data-i18n="rsvp.cta"></a>
+        <p class="soon" id="form-soon" data-i18n="rsvp.soon"></p>
+      </div>
+      <a class="next" href="#contact" data-i18n-attr="aria-label:a11y.next"></a>
+    </section>
+
+    <section class="block" id="contact">
+      <div class="group">
+        <h2 data-i18n="contact.title"></h2>
+        <p data-i18n="contact.body"></p>
+        <p class="mails">
+          <a href="mailto:klarakb@hotmail.com">klarakb@hotmail.com</a><br>
+          <a href="mailto:arnegiacomo@gmail.com">arnegiacomo@gmail.com</a>
+        </p>
+      </div>
+      <footer class="foot">
+        <p data-i18n="footer.note"></p>
+      </footer>
+    </section>
+
+  </div>
+
 </main>
 
 <script src="js/i18n.js"></script>
