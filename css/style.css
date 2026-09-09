@@ -210,20 +210,27 @@ h1 {
 
 .group + .group { margin-top: clamp(2.5rem, 6vh, 3.75rem); }
 
-/* One screen at a time. Proximity on narrow screens, where a screen can grow
-   past the viewport and mandatory snapping would strand its bottom. */
-@media (min-height: 720px) {
-  html { scroll-snap-type: y proximity; }
+/* One screen at a time. The deck scrolls rather than the document, so a panel
+   and the scrollport are the same box and every snap position lands flush.
+   Sizing panels against the document viewport cannot hold that: the mobile URL
+   bar grows the scrollport without resizing the panels. Viewports too short to
+   be a deck at all fall back to scrolling the document. */
+@media (min-height: 600px) {
+  body { overflow: hidden; }
+
+  main {
+    height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scroll-snap-type: y mandatory;
+  }
 
   .hero,
   .block {
+    min-height: 100dvh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
   }
-}
-
-@media (min-height: 720px) and (min-width: 700px) {
-  html { scroll-snap-type: y mandatory; }
 }
 
 .next {
@@ -364,7 +371,7 @@ h1 {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
+  html, main { scroll-behavior: smooth; }
 }
 
 @media (prefers-reduced-motion: reduce) {
